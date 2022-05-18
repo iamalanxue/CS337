@@ -143,7 +143,7 @@ awardNames = [ 'best motion picture - drama',
 # In[12]:
 
 
-def findAllWinners(matrix):
+def findAllWinners(matrix, df):
     winners = []
     for i in range(0, len(matrix), 2):
         con = matrix[i]
@@ -151,7 +151,6 @@ def findAllWinners(matrix):
         df['Rows'] = df['text'].apply(lambda x: findRows(x, con, noncon)) #Problems here  Df is defined outside of the function
         ccc = df[~df['Rows'].isnull()]
         winner = hashNgrams(ccc)
-        print(winner)
         winners.append(winner)
     return winners
 
@@ -182,14 +181,7 @@ def award_winners(year):
     s = list(set(test))
     df = pd.DataFrame(s, columns=['text'])
 
-    con = ['best', 'tv', 'drama', 'actor']
-    noncon = ['actress']
-    df['Rows'] = df['text'].apply(lambda x: findRows(x, con, noncon))
-    df.head(20)
-
-    ccc = df[~df['Rows'].isnull()]
-    hashNgrams(ccc)
-    win = findAllWinners(ALLAWARDS)
+    win = findAllWinners(ALLAWARDS, df)
     #THIS IS THE OUTPUT FOR AWARD WINNERS WHICH IS A DICTIONARY KEYS: AWARD NAMES || VALUE: AWARD WINNERS
     GGWINNERS = makeDict(win, awardNames)
     return GGWINNERS
