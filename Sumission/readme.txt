@@ -13,3 +13,6 @@ python3 gg_api.py 2013
 
 
 Each function stub (e.g., get_hosts(), get_awards()) accepts a string of year as input.
+
+Address for Github repository:
+https://github.com/iamalanxue/CS337
